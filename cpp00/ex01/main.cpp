@@ -19,8 +19,10 @@ int main() {
                  "Available commands are ADD, SEARCH and EXIT" << std::endl;
     while (true) {
         std::cout << COLOR_RESET<<  "> ";
-        std::getline(std::cin, cmd);
-
+        if (!std::getline(std::cin, cmd)) {
+            std::cout << "\nExiting..." << std::endl;
+            return 0;
+        }
         if (cmd == "ADD") {
             book.addContact();
         } else if (cmd == "SEARCH") {
