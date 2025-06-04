@@ -13,6 +13,7 @@ int	main(int ac, char **av)
 			{
 				std::cout << static_cast<char>(std::toupper(static_cast<unsigned char>(av[i][j])));
 			}
+		}
 		std::cout << std::endl;
 	}
 	return (0);
