@@ -1,9 +1,9 @@
-NAME    := harl
+NAME    := harlFilter
 
 CXX     := c++
 CXXFLAGS := -Wall -Werror -Wextra -std=c++20
 
-SRCS    := main.cpp Harl.cpp 
+SRCS    := main.cpp Harl.cpp
 OBJS    := $(SRCS:.cpp=.o)
 
 .PHONY: all clean fclean re
