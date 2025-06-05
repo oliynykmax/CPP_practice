@@ -32,7 +32,7 @@ void Harl::info(void)
 
 void Harl::warning(void)
 {
-	std::cout << "I think I deserve to have some extra bacon for free. \nI've been coming here for years and you just started working here last month." << std::endl;
+	std::cout << "I think I deserve to have some extra bacon for free. \n:wqI've been coming here for years and you just started working here last month." << std::endl;
 }
 
 void Harl::error(void)
