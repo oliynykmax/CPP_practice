@@ -1,7 +1,7 @@
 NAME    := fixed
 
 CXX     := c++
-CXXFLAGS := -Wall -Werror -Wextra -std=c++98
+CXXFLAGS := -Wall -Werror -Wextra -std=c++20
 
 SRCS    := main.cpp Fixed.cpp
 OBJS    := $(SRCS:.cpp=.o)
