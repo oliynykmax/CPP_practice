@@ -2,6 +2,8 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <climits>
+#include <cctype>
 
 PhoneBook::PhoneBook() : currentIndex(0), totalContacts(0) {}
 
@@ -105,22 +107,62 @@ void PhoneBook::searchContacts() const {
                   << std::setw(10) << std::right << _truncate(c.getNickName()) << "│\n";
     }
     std::cout << "└──────────┴──────────┴──────────┴──────────┘\n";
+    std::string input;
     int idx;
     while (true) {
         std::cout << "Enter index to display: ";
-        if (!(std::cin >> idx) || idx < 1 || idx >= totalContacts + 1) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid index!\n";
+        std::getline(std::cin >> std::ws, input);
+        
+        // Check if input is empty
+        if (input.empty()) {
+            std::cout << "\033[31mError: Input cannot be empty!\033[0m\n";
             continue;
         }
-        else {
-            break;
+        
+        // Check if input contains only digits
+        bool isValidNumber = true;
+        for (size_t i = 0; i < input.length(); i++) {
+            if (!std::isdigit(input[i])) {
+                std::cout << "\033[31mError: Please enter only numbers!\033[0m\n";
+                isValidNumber = false;
+                break;
+            }
         }
-
-
+        if (!isValidNumber) {
+            continue;
+        }
+        
+        // Check for overflow - simple approach without exceptions
+        if (input.length() > 10) {
+            std::cout << "\033[31mError: Number too large! Please enter a smaller number.\033[0m\n";
+            continue;
+        }
+        
+        // Convert string to int manually to avoid overflow
+        long long temp = 0;
+        for (size_t i = 0; i < input.length(); i++) {
+            temp = temp * 10 + (input[i] - '0');
+            if (temp > INT_MAX) {
+                std::cout << "\033[31mError: Number too large! Please enter a smaller number.\033[0m\n";
+                isValidNumber = false;
+                break;
+            }
+        }
+        if (!isValidNumber) {
+            continue;
+        }
+        
+        idx = static_cast<int>(temp);
+        
+        // Check if index is in valid range
+        if (idx < 1 || idx > totalContacts) {
+            std::cout << "\033[31mError: Index must be between 1 and " << totalContacts << "!\033[0m\n";
+            continue;
+        }
+        
+        break;
     }
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     displayContact(idx);
 }
 
