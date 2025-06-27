@@ -23,7 +23,7 @@ Fixed::Fixed(const float num) : _value(roundf(num * (1 << _fractional_bits))) {
 Fixed &Fixed::operator=(const Fixed &src) {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &src) {
-		this->_value = src.getRawBits();
+		setRawBits(src.getRawBits());
 	}
 	return *this;
 }
@@ -38,18 +38,17 @@ Fixed::~Fixed() {
 }
 
 int Fixed::getRawBits(void) const {
-    return this->_value;
+    return _value;
 }
 
 void Fixed::setRawBits(int const raw) {
-    std::cout << "setRawBits member function called" << std::endl;
-	this->_value = raw;
+	_value = raw;
 }
 
 float Fixed::toFloat(void) const {
-    return static_cast<float>(this->_value) / (1 << _fractional_bits);
+    return static_cast<float>(_value) / (1 << _fractional_bits);
 }
 
 int Fixed::toInt(void) const {
-    return this->_value >> _fractional_bits;
+    return _value >> _fractional_bits;
 }
