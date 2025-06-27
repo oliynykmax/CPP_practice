@@ -14,12 +14,13 @@ static Fixed sign (Point p1, Point p2, Point p3)
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
+    Fixed zero(0);
     Fixed d1 = sign(point, a, b);
     Fixed d2 = sign(point, b, c);
     Fixed d3 = sign(point, c, a);
-    if (d1 == Fixed(0) || d2 == Fixed(0) || d3 == Fixed(0))
+    if (d1 == zero || d2 == zero || d3 == zero)
          return false;
-    bool has_neg = (d1 < Fixed(0)) || (d2 < Fixed(0)) || (d3 < Fixed(0));
-    bool has_pos = (d1 > Fixed(0)) || (d2 > Fixed(0)) || (d3 > Fixed(0));
+    bool has_neg = (d1 < zero) || (d2 < zero) || (d3 < zero);
+    bool has_pos = (d1 > zero) || (d2 > zero) || (d3 > zero);
     return !(has_neg && has_pos);
 }
