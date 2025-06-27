@@ -5,12 +5,13 @@ CXXFLAGS := -Wall -Werror -Wextra -std=c++20
 
 SRCS    := main.cpp Fixed.cpp
 OBJS    := $(SRCS:.cpp=.o)
+HEADERS := Fixed.hpp
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
