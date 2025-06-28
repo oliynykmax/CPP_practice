@@ -77,17 +77,16 @@ Fixed& Fixed::operator++() {
     return *this;
 }
 
-Fixed Fixed::operator++(int) {
-    Fixed temp(*this);
-    ++(*this);
-    return temp;
-}
-
 Fixed& Fixed::operator--() {
     setRawBits(_value - (1 << _fractional_bits));
     return *this;
 }
 
+Fixed Fixed::operator++(int) {
+    Fixed temp(*this);
+    ++(*this);
+    return temp;
+}
 
 Fixed Fixed::operator--(int) {
     Fixed temp(*this);
@@ -111,3 +110,7 @@ int Fixed::toInt(void) const { return _value >> _fractional_bits; }
 Fixed Fixed::max(const Fixed& a, const Fixed& b) { return (a > b) ? a : b; }
 
 Fixed Fixed::min(const Fixed& a, const Fixed& b) { return (a < b) ? a : b; }
+
+Fixed Fixed::max(Fixed& a, Fixed& b) { return (a > b) ? a : b; }
+
+Fixed Fixed::min(Fixed& a, Fixed& b) { return (a < b) ? a : b; }
