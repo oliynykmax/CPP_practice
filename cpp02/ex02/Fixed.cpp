@@ -2,8 +2,6 @@
 #include <iostream>
 #include <cmath>
 
-static const int _fractional_bits = 8;
-
 Fixed::Fixed() : _value(0) { }
 Fixed::~Fixed() { }
 
