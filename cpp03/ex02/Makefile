@@ -1,11 +1,11 @@
-NAME    := ScavTrap
+NAME    := FlagTrap
 
 CXX     := c++
 CXXFLAGS := -Wall -Werror -Wextra -std=c++20
 
-SRCS    := main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS    := main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp
 OBJS    := $(SRCS:.cpp=.o)
-HEADERS := ClapTrap.hpp ScavTrap.hpp
+HEADERS := ClapTrap.hpp ScavTrap.hpp FlagTrap.hpp
 
 .PHONY: all clean fclean re
 
