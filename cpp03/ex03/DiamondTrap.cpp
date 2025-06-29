@@ -1,4 +1,5 @@
 #include "DiamondTrap.hpp"
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include <iostream>
 #include <format>
@@ -21,5 +22,5 @@ void DiamondTrap::attack(const std::string& target) {
 }
 
 void DiamondTrap::whoAmI() {
-    std::cout << std::format("My name is {}, ClapTrap name is {} \n", DiamondTrap::name, ClapTrap::name);
+    std::cout << std::format("My name is {}, ClapTrap name is {} \n", name, ClapTrap::name);
 }
