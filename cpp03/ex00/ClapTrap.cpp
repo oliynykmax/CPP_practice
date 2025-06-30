@@ -1,5 +1,4 @@
 #include "ClapTrap.hpp"
-#include <format>
 
 ClapTrap::ClapTrap()
     :name("strudel"),
@@ -45,7 +44,7 @@ ClapTrap::~ClapTrap() {
 
 void ClapTrap::attack(const std::string& target) {
     if (EnergyPoints > 0 && HitPoints > 0) {
-        std::cout << std::format("ClapTrap {} attacks {} causing {} points of damage!\n", name, target, AttackDamage);
+        std::cout << "ClapTrap " << name << " attacks " << target << " causing " << AttackDamage << " points of damage!\n";
         EnergyPoints--;
     }
     else {
@@ -54,13 +53,15 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-    std::cout << std::format("ClapTrap {} loses {} points of hit!\n", name, amount);
-    HitPoints-=amount;
+    std::cout << "ClapTrap " << name << " loses " << amount << " points of hit!\n";
+    HitPoints -= amount;
+    if (HitPoints < 0)
+        HitPoints = 0;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
     if (EnergyPoints > 0 && HitPoints > 0) {
-            std::cout << std::format("ClapTrap {} repaired itself by {} points!\n", name, amount);
+            std::cout << "ClapTrap " << name << " repaired itself by " << amount << " points!\n";
             EnergyPoints--;
             HitPoints+=amount;
     }
