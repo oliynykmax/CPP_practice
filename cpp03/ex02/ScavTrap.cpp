@@ -1,6 +1,5 @@
 #include "ScavTrap.hpp"
 #include <iostream>
-#include <format>
 
 ScavTrap::ScavTrap()
     : ClapTrap("DefaultScavTrap")
@@ -38,7 +37,7 @@ ScavTrap::~ScavTrap() {
 
 void ScavTrap::attack(const std::string& target) {
     if (EnergyPoints > 0 && HitPoints > 0) {
-        std::cout << std::format("ScavTrap {} attacks {} causing {} points of damage!\n", name, target, AttackDamage);
+        std::cout << "ScavTrap " << name << " attacks " << target << " causing " << AttackDamage << " points of damage!\n";
         EnergyPoints--;
     }
     else {

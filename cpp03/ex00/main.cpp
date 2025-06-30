@@ -15,8 +15,8 @@ int main(int ac, char **argv) {
     ClapTrap b(a);
     ClapTrap c("rino");
     b = c;
-    a.takeDamage(111111);
-    a.beRepaired(-3);
+    a.takeDamage(1);
+    a.beRepaired(2);
     for (int i = 0; i < 5; i++)
         a.attack("democracy");
     for (int i = 0; i < 5; i++)

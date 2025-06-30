@@ -1,6 +1,6 @@
 #include "FlagTrap.hpp"
 #include <iostream>
-#include <format>
+
 
 FlagTrap::FlagTrap()
     : ClapTrap("DefaultFlagTrap")
@@ -38,7 +38,7 @@ FlagTrap::~FlagTrap() {
 
 void FlagTrap::attack(const std::string& target) {
     if (EnergyPoints > 0 && HitPoints > 0) {
-        std::cout << std::format("FlagTrap {} attacks {} causing {} points of damage!\n", name, target, AttackDamage);
+        std::cout << "FlagTrap " << name << " attacks " << target << " causing " << AttackDamage << " points of damage!\n";
         EnergyPoints--;
     }
     else {
