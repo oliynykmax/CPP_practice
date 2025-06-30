@@ -5,8 +5,10 @@
 class Cat : public Animal {
     public:
     Cat();
-    virtual ~Cat();
-    virtual void makeSound() const override;
+    Cat(const Cat& other);
+    Cat& operator=(const Cat& other);
+    ~Cat() override;
+    void makeSound() const override;
 };
 
 #endif // CAT_HPP

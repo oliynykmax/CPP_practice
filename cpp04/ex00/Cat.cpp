@@ -1,16 +1,28 @@
 #include "Cat.hpp"
 #include <iostream>
-#include <format>
 
-Cat::Cat() : Animal(){
+Cat::Cat() : Animal() {
     type = "Cat";
-    std::cout << std::format("Cat constructor called for {}\n", type);
+    std::cout << "Cat constructor called for " << type << std::endl;
+}
+
+Cat::Cat(const Cat& other) : Animal(other) {
+    type = other.type;
+    std::cout << "Cat copy constructor called for " << type << std::endl;
+}
+
+Cat& Cat::operator=(const Cat& other) {
+    if (this != &other) {
+        Animal::operator=(other);
+    }
+    std::cout << "Cat assignment operator called for " << type << std::endl;
+    return *this;
 }
 
 Cat::~Cat() {
-    std::cout << std::format("Cat destructor called for {}\n", type);
+    std::cout << "Cat destructor called for " << type << std::endl;
 }
 
 void Cat::makeSound() const {
-    std::cout << std::format("Cat makes meow meow meow\n");
+    std::cout << "Cat makes meow meow meow" << std::endl;
 }

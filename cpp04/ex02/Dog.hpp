@@ -9,14 +9,11 @@ class Dog : public Animal {
     Dog();
     Dog(const Dog& other);
     Dog& operator=(const Dog& other);
-    virtual ~Dog();
-    virtual void makeSound() const override;
-
+    ~Dog() override;
+    void makeSound() const override;
+    Brain* getBrain() const;
     private:
     Brain* _brain;
-
-    public:
-    Brain* getBrain() const;
 };
 
 #endif // DOG_HPP
