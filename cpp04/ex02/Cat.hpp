@@ -8,14 +8,11 @@ class Cat : public Animal {
     Cat();
     Cat(const Cat& other);
     Cat& operator=(const Cat& other);
-    virtual ~Cat();
-    virtual void makeSound() const override;
-
+    ~Cat() override;
+    void makeSound() const override;
+    Brain* getBrain() const;
     private:
     Brain* _brain;
-
-    public:
-    Brain* getBrain() const;
 };
 
 #endif // CAT_HPP

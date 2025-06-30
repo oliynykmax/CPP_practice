@@ -1,13 +1,12 @@
 #include "Animal.hpp"
 #include <iostream>
-#include <format>
 
 Animal::Animal() : type("Base") {
-    std::cout << std::format("Base constructor called\n");
+    std::cout << "Base constructor called" << std::endl;
 }
 
 Animal::~Animal() {
-    std::cout << std::format("{} destructor called\n", type);
+    std::cout << type << " destructor called" << std::endl;
 }
 
 Animal::Animal(const Animal& other) : type(other.type) { }
@@ -20,7 +19,7 @@ Animal& Animal::operator=(const Animal& other) {
 }
 
 void Animal::makeSound() const {
-    std::cout << std::format("{} makes a sound\n", type);
+    std::cout << type << " makes a sound" << std::endl;
 }
 
 std::string Animal::getType() const {

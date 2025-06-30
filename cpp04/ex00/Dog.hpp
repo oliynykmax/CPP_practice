@@ -6,8 +6,10 @@
 class Dog : public Animal {
     public:
     Dog();
-    virtual ~Dog();
-    virtual void makeSound() const override;
+    Dog(const Dog& other);
+    Dog& operator=(const Dog& other);
+    ~Dog() override;
+    void makeSound() const override;
 };
 
 #endif // DOG_HPP
