@@ -32,5 +32,5 @@ re:
 	$(MAKE) --no-print-directory all
 
 -include $(DEPS)
-
+.SILENT:
 .PHONY: all clean fclean re
