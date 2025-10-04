@@ -34,3 +34,4 @@ re:
 -include $(DEPS)
 
 .PHONY: all clean fclean re
+.SILENT:
