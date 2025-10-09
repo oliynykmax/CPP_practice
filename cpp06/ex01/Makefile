@@ -8,9 +8,7 @@ DEPS    := $(OBJS:.o=.d)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "🔗 Linking $(NAME)..."
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
-	@echo "🎉 Build complete!"
 
 .build/%.o: src/%.cpp | .build
 	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
@@ -19,17 +17,12 @@ $(NAME): $(OBJS)
 	mkdir -p .build
 
 clean:
-	@echo "🧹 Cleaning..."
 	rm -rf .build
 
 fclean: clean
-	@echo "🗑️ Removing $(NAME)"
 	rm -f $(NAME)
 
-re:
-	@echo "🔄 Rebuilding..."
-	$(MAKE) --no-print-directory fclean
-	$(MAKE) --no-print-directory all
+re: fclean all
 
 -include $(DEPS)
 

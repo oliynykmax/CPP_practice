@@ -51,6 +51,8 @@ static bool isInteger(const std::string& s) {
 }
 
 static std::string formatFloat(float value) {
+    if (std::isnan(value)) return std::string("nan");
+    if (std::isinf(value)) return value > 0 ? std::string("+inf") : std::string("-inf");
     if (std::isfinite(value) && std::floor(value) == value) {
         std::ostringstream oss;
         oss << std::fixed << std::setprecision(1) << value;
@@ -62,18 +64,20 @@ static std::string formatFloat(float value) {
 }
 
 static std::string formatDouble(double value) {
+    if (std::isnan(value)) return std::string("nan");
+    if (std::isinf(value)) return value > 0 ? std::string("+inf") : std::string("-inf");
     if (std::isfinite(value) && std::floor(value) == value) {
         std::ostringstream oss;
         oss << std::fixed << std::setprecision(1) << value;
         return oss.str();
     }
     std::ostringstream oss;
-    oss << std::defaultfloat << value; // default precision avoids representation noise
+    oss << std::defaultfloat << value;
     return oss.str();
 }
 
 static void print_converted(std::string n, double d, float f) {
-    if ( std::isnan(d) || d > 127 || d < CHAR_MIN ) {
+    if ( std::isnan(d) || d > 127 || d < 0 ) {
         std::cout << "char: " << "impossible" << std::endl;
     } else {
         char c = static_cast<char>(d);
@@ -93,7 +97,7 @@ void ScalarConverter::convert(std::string input) {
     if (input == "nan" || input == "nanf") {
         print_converted("impossible", NAN, NAN);
         return;
-    } else if (input == "+inf" || input == "+inff" || input == "inf" || input == "inff") {
+    } else if (input == "+inf" || input == "+inff") {
         print_converted("impossible", INFINITY, INFINITY);
         return;
     } else if (input == "-inf" || input == "-inff") {
