@@ -1,7 +1,7 @@
 NAME    := ex02
 CXX     := c++
 CXXFLAGS:= -Wall -Wextra -Werror -std=c++20 -Iinc
-SRCS    := src/Base.cpp src/A.cpp src/B.cpp src/C.cpp src/main.cpp
+SRCS    := src/A.cpp src/B.cpp src/main.cpp src/C.cpp
 OBJS    := $(SRCS:src/%.cpp=.build/%.o)
 DEPS    := $(OBJS:.o=.d)
 
@@ -14,7 +14,7 @@ $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
 .build:
-	mkdir -p .build
+	@mkdir -p .build
 
 clean:
 	rm -rf .build
@@ -22,8 +22,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	@$(MAKE) --no-print-directory fclean
+	@$(MAKE) --no-print-directory all
 
 -include $(DEPS)
-
 .PHONY: all clean fclean re
