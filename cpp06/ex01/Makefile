@@ -14,7 +14,7 @@ $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
 .build:
-	mkdir -p .build
+	@mkdir -p .build
 
 clean:
 	rm -rf .build
@@ -22,8 +22,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	@$(MAKE) --no-print-directory fclean
+	@$(MAKE) --no-print-directory all
 
 -include $(DEPS)
-
 .PHONY: all clean fclean re
