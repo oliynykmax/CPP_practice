@@ -64,10 +64,11 @@ int main() {
   identify(tr);
   identify(*tr);
 
-  Base *r = generate();
-
-  identify(r);
-  identify(*r);
-
   delete ptr;
+  Base *p = generate();
+
+  identify(p);
+  identify(*p);
+  delete tr;
+  delete p;
 }
