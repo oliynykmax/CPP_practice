@@ -114,19 +114,14 @@ void ScalarConverter::convert(std::string input) {
 
   if (isInteger(input) || isFloat(input) || isDouble(input)) {
     try {
-      f = std::stof(input);
-    } catch (const std::out_of_range &) {
-      f = (input[0] == '-') ? -std::numeric_limits<float>::infinity()
-                            : std::numeric_limits<float>::infinity();
-    }
-    try {
       d = std::stod(input);
     } catch (const std::out_of_range &) {
       d = (input[0] == '-') ? -std::numeric_limits<double>::infinity()
                             : std::numeric_limits<double>::infinity();
     }
+    f = static_cast<float>(d);
     std::string str = "";
-    if (d > std::numeric_limits<int>::max() ||
+    if (!std::isfinite(d) || d > std::numeric_limits<int>::max() ||
         d < std::numeric_limits<int>::min()) {
       str = "impossible";
     }
