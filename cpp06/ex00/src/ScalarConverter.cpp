@@ -10,19 +10,17 @@
 #include <stdexcept>
 #include <string>
 
-static const char RE_SIGN[] = "[+-]?";
-static const char RE_DEC_FRAC[] = "(?:\\d+(?:\\.\\d*)?|\\.\\d+)";
-static const char RE_EXP[] = "(?:[eE][+-]?\\d+)?";
-
 static const std::regex &doubleRegex() {
-  static const std::regex re(std::string("^") + RE_SIGN + RE_DEC_FRAC + RE_EXP +
-                             "$");
+  static const std::regex re(
+      R"(^[+-]?(?:\d*\.\d+|\d+\.\d*|\d+)(?:[eE][+-]?\d+)?$)",
+      std::regex::optimize);
   return re;
 }
 
 static const std::regex &floatRegex() {
-  static const std::regex re(std::string("^") + RE_SIGN + RE_DEC_FRAC + RE_EXP +
-                             "[fF]$");
+  static const std::regex re(
+      R"(^[+-]?(?:\d*\.\d+|\d+\.\d*|\d+)(?:[eE][+-]?\d+)?[fF]$)",
+      std::regex::optimize);
   return re;
 }
 
