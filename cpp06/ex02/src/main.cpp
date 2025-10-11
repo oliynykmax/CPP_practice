@@ -2,7 +2,6 @@
 #include "../inc/B.hpp"
 #include "../inc/Base.hpp"
 #include "../inc/C.hpp"
-#include <cctype>
 #include <iostream>
 #include <random>
 
@@ -55,20 +54,15 @@ Base *generate(void) {
 
 int main() {
   Base *ptr = generate();
-
   identify(ptr);
   identify(*ptr);
-
   Base *tr = generate();
-
   identify(tr);
   identify(*tr);
-
-  delete ptr;
   Base *p = generate();
-
   identify(p);
   identify(*p);
+  delete ptr;
   delete tr;
   delete p;
 }
