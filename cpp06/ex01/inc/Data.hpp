@@ -11,4 +11,6 @@ public:
   Data(int num, double details);
   Data(const Data &other) = default;
   Data &operator=(const Data &other) = default;
+  int getNumber() const;
+  double getDetails() const;
 };
