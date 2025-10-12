@@ -78,7 +78,7 @@ static std::string formatDouble(double value) {
   return oss.str();
 }
 
-static void print_converted(std::string n, double d, float f) {
+static void print_converted(std::string n, double d) {
   if (std::isnan(d) || d > 127 || d < 0) {
     std::cout << "char: " << "impossible" << std::endl;
   } else {
@@ -93,23 +93,22 @@ static void print_converted(std::string n, double d, float f) {
     std::cout << "int: " << static_cast<int>(d) << std::endl;
   else
     std::cout << "int: " << n << std::endl;
-  std::cout << "float: " << formatFloat(f) << "f" << std::endl;
+  std::cout << "float: " << formatFloat(static_cast<float>(d)) << "f" << std::endl;
   std::cout << "double: " << formatDouble(d) << std::endl;
 }
 
 void ScalarConverter::convert(std::string input) {
   if (input == "nan" || input == "nanf") {
-    print_converted("impossible", NAN, NAN);
+    print_converted("impossible", NAN);
     return;
   } else if (input == "+inf" || input == "+inff") {
-    print_converted("impossible", INFINITY, INFINITY);
+    print_converted("impossible", INFINITY);
     return;
   } else if (input == "-inf" || input == "-inff") {
-    print_converted("impossible", -INFINITY, -INFINITY);
+    print_converted("impossible", -INFINITY);
     return;
   }
 
-  float f = 0.0f;
   double d = 0.0;
 
   if (isInteger(input) || isFloat(input) || isDouble(input)) {
@@ -119,16 +118,15 @@ void ScalarConverter::convert(std::string input) {
       d = (input[0] == '-') ? -std::numeric_limits<double>::infinity()
                             : std::numeric_limits<double>::infinity();
     }
-    f = static_cast<float>(d);
     std::string str = "";
     if (!std::isfinite(d) || d > std::numeric_limits<int>::max() ||
         d < std::numeric_limits<int>::min()) {
       str = "impossible";
     }
-    print_converted(str, d, f);
+    print_converted(str, d);
   } else if (input.size() == 1) {
     char c = input[0];
-    print_converted("", c, c);
+    print_converted("", c);
   } else {
     std::cout << "char: impossible\n";
     std::cout << "int: impossible\n";
