@@ -1,6 +1,6 @@
 NAME    := ex00
 CXX     := c++
-CXXFLAGS:= -Wall -Wextra -Werror -std=c++20 -Iinc
+CXXFLAGS:= -Wall -Wextra -Werror -std=c++98 -Iinc
 SRCS    := $(wildcard src/*.cpp)
 OBJS    := $(SRCS:src/%.cpp=.build/%.o)
 DEPS    := $(OBJS:.o=.d)
