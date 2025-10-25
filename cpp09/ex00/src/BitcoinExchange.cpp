@@ -12,7 +12,7 @@ static bool isFloatOrInt(const std::string& str) {
 }
 
 void BitcoinExchange::queryAndPrint(std::chrono::year_month_day date, double value) {
-    auto it = data.contains(date) ? data.find(date) : data.upper_bound(date);
+    auto it = data.lower_bound(date);
     if (it == data.end() || it->first > date) {
         if (it == data.begin()) {
             std::cerr << "No earlier data available for " << date << '\n';
@@ -40,25 +40,25 @@ void BitcoinExchange::processFile(const std::string& filename) {
         std::istringstream date_stream(date_str);
         std::chrono::year_month_day date;
         date_stream >> std::chrono::parse("%F", date);
-        if (date_stream.fail()) {
-            std::cout << "Error: bad input => " << date_str << std::endl;
+        if (date_stream.fail() || !date.ok()) {
+            std::cerr << "Error: bad input => " << date_str << std::endl;
             continue;
         }
         if (value_str.empty()) {
-            std::cout << "Error: bad input => empty value."  << std::endl;
+            std::cerr << "Error: bad input => empty value."  << std::endl;
             continue;
         }
         if (!isFloatOrInt(value_str)) {
-            std::cout << "Error: bad input => " << value_str << std::endl;
+            std::cerr << "Error: bad input => " << value_str << std::endl;
             continue;
         }
         double value = std::stod(value_str);
         if (value > 1000) {
-            std::cout << "Error: too large a number." << std::endl;
+            std::cerr << "Error: too large a number." << std::endl;
             continue;
         }
         if (value < 0) {
-            std::cout << "Error: not a positive number." << std::endl;
+            std::cerr << "Error: not a positive number." << std::endl;
             continue;
         }
         queryAndPrint(date, value);
@@ -84,7 +84,7 @@ BitcoinExchange::BitcoinExchange() {
             std::istringstream date_stream(date_str);
             std::chrono::year_month_day date;
             date_stream >> std::chrono::parse("%F", date);
-            if (date_stream.fail()) {
+            if (date_stream.fail() || !date.ok()) {
                 throw std::invalid_argument("invalid date format");
             }
             data[date] = rate;
