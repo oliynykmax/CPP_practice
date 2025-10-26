@@ -1,6 +1,6 @@
 NAME    := PmergeMe
 CXX     := c++
-CXXFLAGS:= -Wall -Wextra -Werror -std=c++20 -Iinc
+CXXFLAGS:= -Wall -Wextra -Werror -std=c++20 -O2 -Iinc 
 SRCS    := src/main.cpp src/PmergeMe.cpp
 OBJS    := $(SRCS:src/%.cpp=.build/%.o)
 DEPS    := $(OBJS:.o=.d)
