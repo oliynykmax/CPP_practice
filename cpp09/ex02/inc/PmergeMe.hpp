@@ -16,12 +16,6 @@ template <typename Container> Container parseAndLoad(int argc, char **argv) {
       exit(1);
     }
 
-    if (std::find(container.begin(), container.end(), value) !=
-        container.end()) {
-      std::cerr << "Error: duplicated integer" << std::endl;
-      exit(1);
-    }
-
     container.push_back(value);
   }
 
