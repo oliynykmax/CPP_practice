@@ -24,11 +24,9 @@ int main(int argc, char **argv) {
   }
   std::cout << std::endl;
 
-  std::chrono::steady_clock::time_point start_vec =
-      std::chrono::steady_clock::now();
+  std::chrono::steady_clock::time_point start_vec = std::chrono::steady_clock::now();
   std::vector<int> result_vec = sort_vector(argc, argv);
-  std::chrono::steady_clock::time_point end_vec =
-      std::chrono::steady_clock::now();
+  std::chrono::steady_clock::time_point end_vec = std::chrono::steady_clock::now();
 
   std::cout << "After: ";
   for (size_t i = 0; i < result_vec.size(); ++i) {
@@ -36,32 +34,22 @@ int main(int argc, char **argv) {
   }
   std::cout << std::endl;
 
-  if (is_sorted(result_vec)) {
-    std::cout << "sorted correctly!\n";
-  } else {
-    std::cout << "NOT sorted!\n";
-  }
+  std::cout << (is_sorted(result_vec) ? "sorted correctly!\n" : "NOT skjorted!\n");
 
-  std::chrono::steady_clock::time_point start_deq =
-      std::chrono::steady_clock::now();
+  std::chrono::steady_clock::time_point start_deq = std::chrono::steady_clock::now();
   std::deque<int> result_deq = sort_deque(argc, argv);
-  std::chrono::steady_clock::time_point end_deq =
-      std::chrono::steady_clock::now();
+  std::chrono::steady_clock::time_point end_deq = std::chrono::steady_clock::now();
 
   std::cout << "Time to process a range of " << result_vec.size()
             << " elements with std::vector : " << std::fixed
             << std::setprecision(5)
             << std::chrono::duration_cast<std::chrono::nanoseconds>(end_vec -
                                                                     start_vec)
-                       .count() /
-                   1000.0
-            << " us" << std::endl;
+                       .count() / 1000.0 << " us" << std::endl;
   std::cout << "Time to process a range of " << result_deq.size()
             << " elements with std::deque : " << std::fixed
             << std::setprecision(5)
             << std::chrono::duration_cast<std::chrono::nanoseconds>(end_deq -
                                                                     start_deq)
-                       .count() /
-                   1000.0
-            << " us" << std::endl;
+                       .count() / 1000.0 << " us" << std::endl;
 }
